@@ -1,5 +1,6 @@
 import { Navbar } from "./_components/navbar";
-import { Sidebar } from "./_components/sidebar";
+import { Sidebar } from "./_components/Sidebar";
+
 
 const DashboardLayout = ({ children}: {children: React.ReactNode}) => {
   //console.log(getSafeProfile);
