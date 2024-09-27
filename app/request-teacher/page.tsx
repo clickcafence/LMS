@@ -368,13 +368,14 @@ const [isAgreementModalOpen, setAgreementModalOpen] = React.useState(false);
           <UploadDropzone
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
-              const imageUrl = res[0].url;
-              setImages(imageUrl); // Save the uploaded image URL in state
-              form.setValue("image", imageUrl); // Update the form's image field with the URL
-              toast.success("Your image has been uploaded");
-            }}
-            onUploadError={(error: Error) => {
-              toast.error("Something went wrong, try again");
+              if (res && res.length > 0) {
+                const imageUrl = res[0].url;
+                setImages(imageUrl);
+                form.setValue("image", imageUrl);
+                toast.success("Your image has been uploaded");
+              } else {
+                toast.error("No image was uploaded, please try again.");
+              }
             }}
           />
           {images && (
