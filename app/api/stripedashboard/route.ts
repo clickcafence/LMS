@@ -7,7 +7,9 @@ import { db } from '@/lib/db';
 export async function GET() {
   try {
     const { userId } = auth();
-
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized: Missing user ID' }, { status: 401 });
+    }
     // Fetch the user from the DB
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
