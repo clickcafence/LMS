@@ -7,6 +7,9 @@ export async function GET() {
   try {
     const { userId } = auth();
 
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized: Missing user ID' }, { status: 401 });
+    }
     // Fetch the user's stripeConnectedLinked status
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
