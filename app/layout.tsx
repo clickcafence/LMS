@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 
-import { ThemeProvider } from '@/components/theme-provider'
-
 import './globals.css'
 import Footer from '../components/footer'
 import { ToastProvider } from '@/components/providers/toaster-provider'
@@ -24,19 +22,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en' >
         <body className={`flex min-h-screen flex-col ${inter.className}`}>
-          {/* <ThemeProvider
-            enableSystem
-            attribute='class'
-            defaultTheme='system'
-            disableTransitionOnChange
-          > */}
+
             {/* <Header /> */}
             <main className='grow'>
               <ToastProvider />
               {children}
               </main>
             <Footer />
-          {/* </ThemeProvider> */}
+          
         </body>
       </html>
     </ClerkProvider>
