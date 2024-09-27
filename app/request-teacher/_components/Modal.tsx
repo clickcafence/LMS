@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import {
   Dialog,
@@ -44,6 +43,11 @@ const Modal: React.FC<ModalProps> = ({ userId, isOpen, onClose }) => {
     }
   };
 
+  // Update the onCheckedChange handler
+  const handleCheckedChange = (checked: boolean | "indeterminate") => {
+    setIsChecked(checked === true); // Convert "indeterminate" to false
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -64,7 +68,7 @@ const Modal: React.FC<ModalProps> = ({ userId, isOpen, onClose }) => {
             <Checkbox
               id="terms"
               checked={isChecked}
-              onCheckedChange={setIsChecked}
+              onCheckedChange={handleCheckedChange} // Updated handler
             />
             <label
               htmlFor="terms"
