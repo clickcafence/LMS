@@ -1,5 +1,5 @@
 "use client"
-import { Layout, Compass, List, BarChart, Users, Camera, Account, LucideTableProperties } from "lucide-react";
+import { Layout, Compass, List, BarChart, Users, Camera, LucideTableProperties } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
 
