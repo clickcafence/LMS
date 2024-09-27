@@ -8,7 +8,10 @@ export async function POST() {
   try {
     const { userId } = auth();
     console.log("Clerk userId:", userId);
-    
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized: Missing user ID' }, { status: 401 });
+    }
+
     // Fetch the user from the DB
     const user = await prisma.user.findUnique({
       where: { clerkUserId: userId },
