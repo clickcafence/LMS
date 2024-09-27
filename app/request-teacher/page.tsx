@@ -410,11 +410,13 @@ const [isAgreementModalOpen, setAgreementModalOpen] = React.useState(false);
 
           </form>
         </Form>
-        <Modal 
-  userId={userId} 
-  isOpen={isAgreementModalOpen} 
-  onClose={() => setAgreementModalOpen(false)} 
-/>
+        {userId && (
+  <Modal 
+    userId={userId} 
+    isOpen={isAgreementModalOpen} 
+    onClose={() => setAgreementModalOpen(false)} 
+  />
+)}
       </div>
 
     </div>
