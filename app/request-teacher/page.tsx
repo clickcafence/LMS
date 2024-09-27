@@ -91,16 +91,17 @@ const [isAgreementModalOpen, setAgreementModalOpen] = React.useState(false);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      // Open the modal first
       setAgreementModalOpen(true);
   
-      const adjustedBornDate = new Date(
-        Date.UTC(
-          values.bornDate.getFullYear(),
-          values.bornDate.getMonth(),
-          values.bornDate.getDate()
-        )
-      );
+      const adjustedBornDate = values.bornDate
+        ? new Date(
+            Date.UTC(
+              values.bornDate.getFullYear(),
+              values.bornDate.getMonth(),
+              values.bornDate.getDate()
+            )
+          )
+        : undefined;
   
       await axios.post("/api/teacher", {
         ...values,
@@ -109,7 +110,7 @@ const [isAgreementModalOpen, setAgreementModalOpen] = React.useState(false);
   
       toast.success("Teacher request is created");
     } catch (error: any) {
-      setAgreementModalOpen(false); // Close modal on error
+      setAgreementModalOpen(false);
       if (error.response) {
         toast.error(`Server responded with ${error.response.status} error`);
       } else if (error.request) {
@@ -119,6 +120,7 @@ const [isAgreementModalOpen, setAgreementModalOpen] = React.useState(false);
       }
     }
   };
+  
   
   return (
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
