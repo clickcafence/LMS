@@ -1,70 +1,46 @@
-"use client"
+"use client";
 
-import { Course } from "@prisma/client"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react"
-import Link from "next/link";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { User } from "@prisma/client";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { User } from "@prisma/client"; // Ensure User matches your actual data structure
 
-export const columns: ColumnDef<User, keyof User>[] = [
+// Adjusting the type to match the subset of fields you need
+export const columns: ColumnDef<Pick<User, "firstName" | "lastName" | "email">>[] = [
   {
     accessorKey: "firstName",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-         First Name
-          {column.getIsSorted() === "asc" ? <ArrowUpDown className="h-4 w-4 ml-2" /> : null}
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        First Name
+        {column.getIsSorted() && <ArrowUpDown className="h-4 w-4 ml-2" />}
+      </Button>
+    ),
   },
   {
     accessorKey: "lastName",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-         Last Name
-          {column.getIsSorted() === "asc" ? <ArrowUpDown className="h-4 w-4 ml-2" /> : null}
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Last Name
+        {column.getIsSorted() && <ArrowUpDown className="h-4 w-4 ml-2" />}
+      </Button>
+    ),
   },
   {
     accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Email
-          {column.getIsSorted() === "asc" ? <ArrowUpDown className="h-4 w-4 ml-2" /> : null}
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Email
+        {column.getIsSorted() && <ArrowUpDown className="h-4 w-4 ml-2" />}
+      </Button>
+    ),
   },
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => {
-  //     const { id } = row.original;
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger>
-  //           <Button variant="ghost">
-  //             <MoreHorizontal className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent>
-  //           <Link href={`/teacher/users/${id}`}>
-  //             <DropdownMenuItem>
-  //               <Pencil className="h-4 w-4 mr-2" />
-  //               Edit
-  //             </DropdownMenuItem>
-  //           </Link>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     );
-  //   },
-  // },
 ];
