@@ -25,6 +25,11 @@ export async function POST(
         console.error("Course not found or unpublished");
         return new NextResponse("Not Found", { status: 404 });
       }
+      // Ensure the course price is valid
+      if (course.price === null || course.price === undefined) {
+        console.error("Course price is missing");
+        return new NextResponse("Course price is missing", { status: 400 });
+      }
   
       const purchase = await db.purchase.findUnique({
         where: {
